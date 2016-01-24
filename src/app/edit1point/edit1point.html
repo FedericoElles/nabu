@@ -1,0 +1,84 @@
+<div class="container">
+
+  <div>
+    <acme-navbar creation-date="main.creationDate"></acme-navbar>
+  </div>
+
+  <h1>Point #{{ctrl.params.id}}:</h1>
+
+
+
+  <form class="form-horizontal" ng-repeat="point in ctrl.nabu.data.points | filter: ctrl.filterFunction | orderBy:order">
+    <fieldset>
+    
+      <!-- Form Name -->
+      <legend>Editieren {{point.point_id}}</legend>
+      
+     
+      <!-- Textarea -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="way_description">Wegbeschreibung</label>
+        <div class="col-md-4">                     
+          <textarea ng-model="point.way_description" rows="8" class="form-control" name="way_description"></textarea>
+        </div>
+      </div>
+      
+      <!-- Appended Input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="lat">Lat.</label>
+        <div class="col-md-4">
+          <div class="input-group">
+            <input ng-model="point.lat"  name="lat" class="form-control" placeholder="0" type="number">
+            <span class="input-group-addon">°</span>
+          </div>
+        </div>
+      </div>    
+      
+      <!-- Appended Input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="long">Long.</label>
+        <div class="col-md-4">
+          <div class="input-group">
+            <input ng-model="point.long"  name="long" class="form-control" placeholder="0" type="number">
+            <span class="input-group-addon">°</span>
+          </div>
+        </div>
+      </div>          
+     
+      <!-- Appended Input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="distance_min">Min. Distanz</label>
+        <div class="col-md-4">
+          <div class="input-group">
+            <input ng-model="point.distance_min"  name="distance_min" class="form-control" placeholder="0" type="number">
+            <span class="input-group-addon">km</span>
+          </div>
+          
+        </div>
+      </div>
+      <!-- Appended Input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="order">Reihenfolge</label>
+        <div class="col-md-4">
+          <div class="input-group">
+            <input ng-model="point.order"  name="order" class="form-control" placeholder="0" type="number">
+            <span class="input-group-addon">#</span>
+          </div>
+        </div>
+      </div>
+      
+      
+      <!-- Button (Double) -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="button1id">Speichern</label>
+        <div class="col-md-8">
+          <button id="save" ng-click="ctrl.back()" name="button1id" class="btn btn-primary">Speichern</button>
+          <button id="cancel" ng-click="ctrl.back()" name="Abbrechen" class="btn btn-warning">Abbrechen</button>
+        </div>
+      </div>
+    
+    </fieldset>
+  </form>
+
+  
+</div>

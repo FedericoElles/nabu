@@ -1,0 +1,37 @@
+<div class="container">
+
+  <div>
+    <acme-navbar creation-date="main.creationDate"></acme-navbar>
+  </div>
+
+  <h1>Punkte für Route #{{ctrl.params.routeId}}</h1>
+
+
+
+  <table class="table">
+    <thead>
+      <th>Sort</th>
+      <th>#</th>
+      <th>Fragen</th>
+      <th>Lat</th>
+      <th>Long</th>
+      <th>Beschreibung</th>
+      <th>Genauigkeit</th>
+      <th>Editieren</th>      
+    </thead>
+    <tbody ng-repeat="(index, point) in ctrl.nabu.data.points | filter:ctrl.filterFunction | orderBy:order">
+      <tr>
+        <td ng-bind="point.order"></td>
+        <td ng-bind="point.point_id"></td>
+        <td><a class="btn btn-success" href="#/questions4point/{{point.point_id}}">Fragen ({{ctrl.countQuestions(point.point_id)}})</a></td>
+        <td ng-bind="point.lat"></td>
+        <td ng-bind="point.long"></td>
+        <td ng-bind="point.way_description"></td>
+        <td ng-bind="point.distance_min"></td>
+        <td><a class="btn btn-success" href="#/edit1point/{{point.point_id}}">Edit</a></td>        
+      </tr>
+    </tbody>
+  </table>
+  <button id="cancel" ng-click="ctrl.back()" class="btn btn-default">Zurück</button>
+  
+</div>

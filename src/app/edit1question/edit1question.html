@@ -1,0 +1,137 @@
+<div class="container">
+
+  <div>
+    <acme-navbar creation-date="main.creationDate"></acme-navbar>
+  </div>
+
+  <h1>Frage #{{ctrl.params.id}}:</h1>
+
+
+
+  <form class="form-horizontal" ng-repeat="question in ctrl.nabu.data.multiple_choice | filter: ctrl.filterFunction | orderBy:order">
+    <fieldset>
+    
+      <!-- Form Name -->
+      <legend>Editieren {{question.question_id}}</legend>
+      
+     
+      <!-- Textarea -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="intro">Intro</label>
+        <div class="col-md-4">                     
+          <textarea ng-model="question.intro" rows="2" class="form-control" name="intro"></textarea>
+        </div>
+      </div>
+      
+      <!-- Textarea -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="question_text">Fragentext</label>
+        <div class="col-md-4">                     
+          <textarea ng-model="question.question_text" rows="4" class="form-control" name="question_text"></textarea>
+        </div>
+      </div>      
+      
+      <!-- Appended Input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="difficulty">Schwierigkeit</label>
+        <div class="col-md-4">
+          <div class="input-group">
+            <input ng-model="question.difficulty"  name="difficulty" class="form-control" placeholder="0" type="number">
+          </div>
+        </div>
+      </div>    
+
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" ng-class="{'text-success':(1===question.correct_answer)}" for="a1">Antwort A</label>  
+        <div class="col-md-4">
+        <input ng-model="question.a1"  name="a1" type="text" placeholder="Text" class="form-control input-md">
+        </div>
+      </div>
+      
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" ng-class="{'text-success':(2===question.correct_answer)}" for="a2">Antwort B</label>  
+        <div class="col-md-4">
+        <input ng-model="question.a2"  name="a2" type="text" placeholder="Text" class="form-control input-md">
+        </div>
+      </div>
+      
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" ng-class="{'text-success':(3===question.correct_answer)}" for="a3">Antwort C</label>  
+        <div class="col-md-4">
+        <input ng-model="question.a3"  name="a1" type="text" placeholder="Text" class="form-control input-md">
+        </div>
+      </div>
+      
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" ng-class="{'text-success':(4===question.correct_answer)}" for="a4">Antwort D</label>  
+        <div class="col-md-4">
+        <input ng-model="question.a4"  name="a4" type="text" placeholder="Text" class="form-control input-md">
+        </div>
+      </div>
+                        
+      <!-- Multiple Radios (inline) -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="radios">Korrekte Antwort</label>
+        <div class="col-md-4"> 
+          <label class="radio-inline" for="radios-0">
+            <input ng-model="question.correct_answer" type="radio" name="radios" id="radios-0" ng-value="1" checked="checked">
+            A
+          </label> 
+          <label class="radio-inline" for="radios-1">
+            <input ng-model="question.correct_answer" type="radio" name="radios" id="radios-1" ng-value="2">
+            B
+          </label> 
+          <label class="radio-inline" for="radios-2">
+            <input ng-model="question.correct_answer" type="radio" name="radios" id="radios-2" ng-value="3">
+            C
+          </label> 
+          <label class="radio-inline" for="radios-3">
+            <input ng-model="question.correct_answer" type="radio" name="radios" id="radios-3" ng-value="4">
+            D
+          </label>
+        </div>
+      </div>   
+     
+    
+       <!-- Textarea -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="answer_text">Antworttext</label>
+        <div class="col-md-4">                     
+          <textarea ng-model="question.answer_text" rows="4" class="form-control" name="answer_text"></textarea>
+        </div>
+      </div>      
+      
+       <!-- Textarea -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="hint1">Hinweis 1</label>
+        <div class="col-md-4">                     
+          <textarea ng-model="question.hint1" rows="2" class="form-control" name="hint1"></textarea>
+        </div>
+      </div>      
+      
+       <!-- Textarea -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="hint2">Hinweis 2</label>
+        <div class="col-md-4">                     
+          <textarea ng-model="question.hint2" rows="2" class="form-control" name="hint2"></textarea>
+        </div>
+      </div>            
+      
+      <!-- Button (Double) -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="button1id">Speichern</label>
+        <div class="col-md-8">
+          <button id="save" ng-click="ctrl.back()" name="button1id" class="btn btn-primary">Speichern</button>
+          <button id="cancel" ng-click="ctrl.back()" name="Abbrechen" class="btn btn-warning">Abbrechen</button>
+        </div>
+      </div>
+    
+    </fieldset>
+  </form>
+
+  
+</div>

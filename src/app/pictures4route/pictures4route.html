@@ -1,0 +1,37 @@
+<div class="container">
+
+  <div>
+    <acme-navbar creation-date="main.creationDate"></acme-navbar>
+  </div>
+
+  <h1>Bilder für Route #{{ctrl.params.routeId}}</h1>
+
+
+
+  <table class="table">
+    <thead>
+      <th>Link</th>
+      <th>Preview</th>
+      <th>Editieren</th>      
+    </thead>
+    <tbody ng-repeat="(index, picture) in ctrl.nabu.data.preview_pictures | filter:{route_id:ctrl.params.routeId} | orderBy:order">
+      <tr>
+        <td ng-if="ctrl.editId!=picture.picture_id" ng-bind="picture.link"></td>
+        <td ng-if="ctrl.editId==picture.picture_id">
+          <input ng-model="ctrl.data.link" name="route_name" type="text" placeholder="URL" class="form-control input-md">
+        </td>
+        <td>
+          <img ng-if="ctrl.editId!=picture.picture_id" ng-src="{{picture.link}}" alt="">
+          <img ng-if="ctrl.editId==picture.picture_id" ng-src="{{ctrl.data.link}}" alt="">
+        </td>
+        <td>
+          <a ng-if="ctrl.editId!=picture.picture_id" ng-click="ctrl.edit(picture)" class="btn btn-success" >Edit</a>
+          <a ng-if="ctrl.editId==picture.picture_id" ng-click="ctrl.save(picture)" class="btn btn-primary" >Speichern</a>
+          <a ng-if="ctrl.editId==picture.picture_id" ng-click="ctrl.cancel(picture)" class="btn btn-default" >Abbrechen</a>
+        </td>        
+      </tr>
+    </tbody>
+  </table>
+  <button id="cancel" ng-click="ctrl.back()" class="btn btn-default">Zurück</button>
+  
+</div>

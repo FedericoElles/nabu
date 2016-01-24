@@ -1,0 +1,103 @@
+<div class="container">
+
+  <div>
+    <acme-navbar creation-date="main.creationDate"></acme-navbar>
+  </div>
+
+  <h1>Route #{{ctrl.params.id}}: {{ctrl.nabu.data.routes[ctrl.params.id].route_name}}</h1>
+
+
+
+  <form class="form-horizontal">
+    <fieldset>
+    
+      <!-- Form Name -->
+      <legend>Editieren</legend>
+      
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="route_name">Name</label>  
+        <div class="col-md-4">
+        <input ng-model="ctrl.nabu.data.routes[ctrl.params.id].route_name" name="route_name" type="text" placeholder="Name..." class="form-control input-md">
+          
+        </div>
+      </div>
+      
+      <!-- Textarea -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="description">Beschreibung</label>
+        <div class="col-md-4">                     
+          <textarea ng-model="ctrl.nabu.data.routes[ctrl.params.id].description" class="form-control" name="description"></textarea>
+        </div>
+      </div>
+      
+      <!-- Textarea -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="start_place_desc">Startort</label>
+        <div class="col-md-4">                     
+          <textarea ng-model="ctrl.nabu.data.routes[ctrl.params.id].start_place_desc" class="form-control" name="start_place_desc"></textarea>
+        </div>
+      </div>
+      
+      <!-- Textarea -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="end_place_desc">Zielort</label>
+        <div class="col-md-4">                     
+          <textarea ng-model="ctrl.nabu.data.routes[ctrl.params.id].end_place_desc" class="form-control" name="end_place_desc"></textarea>
+        </div>
+      </div>
+      
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="link_map">Link Karte</label>  
+        <div class="col-md-4">
+        <input ng-model="ctrl.nabu.data.routes[ctrl.params.id].link_map" name="link_map" type="url" placeholder="http://..." class="form-control input-md">
+          
+        </div>
+      </div>
+      
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="pictures">Bild</label>  
+        <div class="col-md-4">
+        <input ng-model="ctrl.nabu.data.routes[ctrl.params.id].pictures" name="pictures" type="url" placeholder="http://..." class="form-control input-md">
+          
+        </div>
+      </div>
+      
+      <!-- Appended Input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="distance">Distanz</label>
+        <div class="col-md-4">
+          <div class="input-group">
+            <input ng-model="ctrl.nabu.data.routes[ctrl.params.id].distance"  name="distance" class="form-control" placeholder="0" type="number">
+            <span class="input-group-addon">km</span>
+          </div>
+          
+        </div>
+      </div>
+      <!-- Appended Input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="duration">Dauer</label>
+        <div class="col-md-4">
+          <div class="input-group">
+            <input ng-model="ctrl.nabu.data.routes[ctrl.params.id].duration"  name="duration" class="form-control" placeholder="0" type="number">
+            <span class="input-group-addon">Min.</span>
+          </div>
+          
+        </div>
+      </div>
+      <!-- Button (Double) -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="button1id">Speichern</label>
+        <div class="col-md-8">
+          <button id="save" ng-click="ctrl.back()" name="button1id" class="btn btn-primary">Speichern</button>
+          <button id="cancel" ng-click="ctrl.back()" name="Abbrechen" class="btn btn-warning">Abbrechen</button>
+        </div>
+      </div>
+    
+    </fieldset>
+  </form>
+
+  
+</div>

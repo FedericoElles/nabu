@@ -1,0 +1,38 @@
+<div class="container">
+
+  <div>
+    <acme-navbar creation-date="main.creationDate"></acme-navbar>
+  </div>
+
+  <h1>Routen ({{ctrl.nabu.data.routes.length}})</h1>
+
+
+
+  <table class="table">
+    <thead>
+      <th>#</th>
+      <th>Name</th>
+      <th>Bilder</th>
+      <th>Punkte</th>
+      <th>Beschreibung</th>
+      <th>Startpunkt</th>
+      <th>Endpunkt</th>
+      <th>Link Karte</th>
+      <th>Editieren</th>      
+    </thead>
+    <tbody ng-repeat="(index, route) in ctrl.nabu.data.routes">
+      <tr>
+        <td ng-bind="route.route_id"></td>
+        <td ng-bind="route.route_name"></td>
+        <td><a class="btn btn-success" href="#/pictures4route/{{route.route_id}}">Bilder ({{ctrl.countPictures(route.route_id)}})</a></td>
+        <td><a class="btn btn-success" href="#/points4route/{{route.route_id}}">Punkte ({{ctrl.countPoints(route.route_id)}})</a></td>
+        <td ng-bind="route.description"></td>
+        <td ng-bind="route.start_place_desc"></td>
+        <td ng-bind="route.end_place_desc"></td>
+        <td ng-bind="route.link_map"></td>
+        <td><a class="btn btn-success" href="#/edit1route/{{index}}">Edit</a></td>
+      </tr>
+    </tbody>
+  </table>
+  
+</div>
