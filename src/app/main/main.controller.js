@@ -10,6 +10,10 @@
     var vm = this;
 
     vm.nabu = nabuData;
+    
+    vm.ctrl = {
+      signedIn: false
+    };
 
     vm.awesomeThings = [];
     vm.classAnimation = '';
