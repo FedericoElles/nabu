@@ -30,7 +30,21 @@
     
     vm.save = function(picture){
       picture._save = true;
-      vm.editId = false;
+      var data = {
+        link:vm.data.link,
+        picture_id: picture.picture_id,
+        _temp: true
+      }
+      nabuData.update('preview_pictures', data, function(err, data){
+        if (err){
+          
+        } else {
+          picture.link = vm.data.link;
+          vm.editId = false;          
+        }
+      })
+      console.log('')
+
     }   
     
     vm.cancel = function(){
