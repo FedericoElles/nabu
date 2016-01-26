@@ -1,11 +1,6 @@
 <?php
 
-//$dsn = '';
-$dsn = 'mysql://nabu:nabu@localhost/nabu/';
-$clients = [];
-
-$user = 'test';
-$pass = 'test';
+include 'config.php';
 
 /**
 * The MIT License
@@ -316,6 +311,7 @@ ArrestDB::Serve('PUT', '/(#any)/(#any)/(#num)', function ($table, $col, $id)
 		if ($result === false)
 		{
 			$result = ArrestDB::$HTTP[409];
+			$result['sql'] = $query;
 		}
 
 		else
@@ -379,6 +375,7 @@ class ArrestDB
 				'code' => 409,
 				'status' => 'Conflict',
 			],
+			'sql' => ''
 		],
 		503 => [
 			'error' => [
