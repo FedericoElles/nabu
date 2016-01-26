@@ -12,11 +12,29 @@
     vm.nabu = nabuData;
     
     vm.ctrl = {
-      signedIn: false
+      signedIn: nabuData.isLoggedIn(),
+      msg: '',
+      user: '',
+      pass: ''
     };
+    
+    console.log('LoggedIn', vm.ctrl.signedIn);
 
     vm.awesomeThings = [];
     vm.classAnimation = '';
+    
+    vm.login = function(){
+      console.log(vm.ctrl.user, vm.ctrl.pass);
+      nabuData.login(vm.ctrl.user, vm.ctrl.pass, function(err, data){
+        if (err){
+          vm.ctrl.signedIn = false;
+          vm.ctrl.msg = "Password ungültig";
+        } else {
+          vm.ctrl.signedIn = true;
+        }
+        
+      });
+    };
     
     // var username = 'test';
     // var authtoken = 'test';

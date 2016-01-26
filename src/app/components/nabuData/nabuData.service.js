@@ -16,10 +16,14 @@
     this.ready = false;
     this.data;
     
+    var ctrl = {
+      isLoggedIn: false
+    };
+    
     if (location.href.indexOf('localhost') > -1){
       CONFIG.url = 'http://localhost/nabu/';
-      CONFIG.user = 'test';
-      CONFIG.pass = 'test';
+      //CONFIG.user = 'test';
+      //CONFIG.pass = 'test';
     }
     
     var MAP = {
@@ -97,7 +101,50 @@
         // or server returns response with an error status.
       }); 
     };
+
+
+
+    /**
+     * 
+     */
+    this.isLoggedIn = function(){
+      return ctrl.isLoggedIn;
+    }
+
+    /**
+     */
+    this.login = function(user, pass, cb){
+      CONFIG.user = user;
+      CONFIG.pass = pass;
+      ctrl.isLoggedIn = false;
+      
+      var headers = getHeaders();
+      $http({
+        method: 'GET',
+        url: CONFIG.url + 'index.php',
+        headers: headers,
+        withCredentials: true
+      }).then(function successCallback(response) {
+        console.log('CORS UPDATE', response.data);
+        if (response.data.error && response.data.error.code === 401){
+          console.log('LOGIN FAILED', response.data.error);
+          cb(response.data);
+        } else {
+          cb(undefined, response.data);
+          ctrl.isLoggedIn = true;
+        }
+
+        // this callback will be called asynchronously
+        // when the response is available
+      }, function errorCallback(response) {
+        console.log('CORS TEST ERROR', response);
+        cb(response);
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+      }); 
+    };
     
+   
   }
 
 })();
