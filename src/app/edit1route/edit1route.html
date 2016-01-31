@@ -8,7 +8,7 @@
 
 
 
-  <form class="form-horizontal">
+  <form class="form-horizontal" novalidate>
     <fieldset>
     
       <!-- Form Name -->
@@ -70,7 +70,7 @@
         <label class="col-md-4 control-label" for="distance">Distanz</label>
         <div class="col-md-4">
           <div class="input-group">
-            <input ng-model="ctrl.nabu.data.routes[ctrl.params.id].distance"  name="distance" class="form-control" placeholder="0" type="number">
+            <input ng-model="ctrl.nabu.data.routes[ctrl.params.id].distance"  name="distance" class="form-control" placeholder="0" type="number" novalidate>
             <span class="input-group-addon">km</span>
           </div>
           
@@ -81,7 +81,7 @@
         <label class="col-md-4 control-label" for="duration">Dauer</label>
         <div class="col-md-4">
           <div class="input-group">
-            <input ng-model="ctrl.nabu.data.routes[ctrl.params.id].duration"  name="duration" class="form-control" placeholder="0" type="number">
+            <input ng-model="ctrl.nabu.data.routes[ctrl.params.id].duration"  name="duration" class="form-control" placeholder="0" type="number" novalidate>
             <span class="input-group-addon">Min.</span>
           </div>
           
@@ -91,8 +91,11 @@
       <div class="form-group">
         <label class="col-md-4 control-label" for="button1id">Speichern</label>
         <div class="col-md-8">
-          <button id="save" ng-click="ctrl.back()" name="button1id" class="btn btn-primary">Speichern</button>
+          <button id="save" ng-click="ctrl.save(ctrl.nabu.data.routes[ctrl.params.id], ctrl.nabu.dataBackup.routes[ctrl.params.id])" name="button1id" class="btn btn-primary">Speichern</button>
+          <button id="reset" ng-click="ctrl.reset(ctrl.nabu.data.routes[ctrl.params.id], ctrl.nabu.dataBackup.routes[ctrl.params.id])" name="Zurücksetzen" class="btn btn-default">Zurücksetzen</button>
           <button id="cancel" ng-click="ctrl.back()" name="Abbrechen" class="btn btn-warning">Abbrechen</button>
+          <span ng-bind="ctrl.status"></span>
+          
         </div>
       </div>
     

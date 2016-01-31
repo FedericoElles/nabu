@@ -7,23 +7,50 @@
 
   /** @ngInject */
   function nabuData($http, $log) {
+    var that = this;
+    this.ready = false;
+    this.data; //stores data
+    this.dataBackup; //stores backup of data         
+    var ctrl = {
+      isLoggedIn: false
+    };    
+    
     var CONFIG = {
       url: '/sync.php',
       user: '',
       pass: ''
     };
-    var that = this;
-    this.ready = false;
-    this.data;
     
-    var ctrl = {
-      isLoggedIn: false
+    this.gui = {
+      saving: 'Speichere...',
+      savingSuccess: 'Speichern erfolgreich!',
+      savingFailed: 'Speichern fehlgeschlagen. Bitte Seite neu laden.'
     };
+    
+    
+    //fetched stored password
+    var storedAuth = localStorage.getItem('nabu-auth');
+    if (typeof storedAuth === 'string'){
+      var aStoredAuth = storedAuth.split('\n');
+      if (aStoredAuth.length === 2){
+        CONFIG.user = aStoredAuth[0]; 
+        CONFIG.pass = aStoredAuth[1];
+        ctrl.isLoggedIn = true;
+        console.log('Auth from last time found.');
+      }
+    }
+    
+
+
+    
+    //not signed in? go to homepage.
+    if (ctrl.isLoggedIn === false && location.hash !== '#/'){
+      location.href = '/';  
+    }
+   
     
     if (location.href.indexOf('localhost') > -1){
       CONFIG.url = 'http://localhost/nabu/';
-      //CONFIG.user = 'test';
-      //CONFIG.pass = 'test';
     }
     
     var MAP = {
@@ -35,9 +62,9 @@
     
     var PRIMARY = {
       preview_pictures: 'picture_id',
-      multiple_choice: 'question_id',
-      routes: 'route_id',
-      points: 'point_id'
+      multiple_choice: 'id',
+      routes: 'id',
+      points: 'id'
     }
     
     function getHeaders(){
@@ -49,12 +76,16 @@
 
 
     function refresh(){
+      var headers = getHeaders();      
       $http({
         method: 'GET',
+        // headers: headers,
+        // withCredentials: true,        
         url: CONFIG.url + 'sync.php'
       }).then(function (response) {
         that.ready = true;
         that.data = response.data;
+        that.dataBackup = angular.copy(that.data);
         $log.log('data', that.data);
       }, function () { //response
         this.data = {};
@@ -105,6 +136,32 @@
 
 
     /**
+     * Compares two objects and returns diff
+     */
+    this.diff = function(newObject, oldObject){
+      var diffObject = {};
+      for (var x in oldObject){
+        if (oldObject[x] !== newObject[x] || x === 'id'){
+          diffObject[x] = newObject[x];
+        }
+      }
+      
+      return diffObject;
+    }
+
+    /**
+     * Apply changes from one object to another
+     */
+    this.applyDiff = function(origObject, changesObject){
+      for (var x in changesObject){
+          origObject[x] = changesObject[x];
+      }
+    }
+
+
+
+
+    /**
      * 
      */
     this.isLoggedIn = function(){
@@ -132,13 +189,15 @@
         } else {
           cb(undefined, response.data);
           ctrl.isLoggedIn = true;
+          //store used + pass
+          localStorage.setItem('nabu-auth', CONFIG.user + '\n' + CONFIG.pass);   
         }
 
         // this callback will be called asynchronously
         // when the response is available
       }, function errorCallback(response) {
         console.log('CORS TEST ERROR', response);
-        cb(response);
+        cb(response);     
         // called asynchronously if an error occurs
         // or server returns response with an error status.
       }); 
