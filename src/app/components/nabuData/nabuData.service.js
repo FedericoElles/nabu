@@ -16,7 +16,7 @@
     };    
     
     var CONFIG = {
-      url: '/sync.php',
+      url: 'http://app.nabu-station-l-k.de/api/',
       user: '',
       pass: ''
     };
@@ -204,11 +204,32 @@
     };
     
         
-
+    /**
+     * Get Object pased on key 
+     */    
+    this.getBackup = function(key, newObject){
+      var oldObject;
+      for (var i=0, ii=that.dataBackup[key].length;i<ii; i+=1){
+        if (newObject[PRIMARY[key]] === that.dataBackup[key][i][PRIMARY[key]]){
+          oldObject = that.dataBackup[key][i];
+        }
+      }
+      return oldObject;
+    }  
+      
     /**
      * Compares two objects and returns diff
      */
-    this.diff = function(newObject, oldObject){
+    this.diff = function(newObject, oldObject, key){
+      
+      if (typeof oldObject === 'undefined' && key){
+        for (var i=0, ii=that.dataBackup[key].length;i<ii; i+=1){
+          if (newObject[PRIMARY[key]] === that.dataBackup[key][i][PRIMARY[key]]){
+            oldObject = that.dataBackup[key][i];
+          }
+        }
+      }
+      
       var diffObject = {};
       for (var x in oldObject){
         if (oldObject[x] !== newObject[x] || x === 'id'){
@@ -222,7 +243,16 @@
     /**
      * Apply changes from one object to another
      */
-    this.applyDiff = function(origObject, changesObject){
+    this.applyDiff = function(origObject, changesObject, key){
+      
+      if (typeof changesObject === 'undefined' && key){
+        for (var i=0, ii=that.dataBackup[key].length;i<ii; i+=1){
+          if (origObject[PRIMARY[key]] === that.dataBackup[key][i][PRIMARY[key]]){
+            changesObject = that.dataBackup[key][i];
+          }
+        }
+      }      
+      
       for (var x in changesObject){
           origObject[x] = changesObject[x];
       }

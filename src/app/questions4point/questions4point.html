@@ -29,7 +29,7 @@
         <td><span ng-bind="question.a2" ng-class="{'text-success':(2===question.correct_answer)}"></span></td>
         <td><span ng-bind="question.a3" ng-class="{'text-success':(3===question.correct_answer)}"></span></td>
         <td><span ng-bind="question.a4" ng-class="{'text-success':(4===question.correct_answer)}"></span></td>
-        <td><a class="btn btn-success" href="#/edit1question/{{question.question_id}}">Edit</a></td>
+        <td><a class="btn btn-success" href="#/edit1question/{{question.id}}">Edit</a></td>
         <td><button ng-click="ctrl.drop(question)"class="btn btn-warning" >X</button></td>                               
       </tr>
     </tbody>

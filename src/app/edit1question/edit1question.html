@@ -8,7 +8,7 @@
 
 
 
-  <form class="form-horizontal" ng-repeat="question in ctrl.nabu.data.multiple_choice | filter: ctrl.filterFunction | orderBy:order">
+  <form novalidate class="form-horizontal" ng-repeat="question in ctrl.nabu.data.multiple_choice | filter: ctrl.filterFunction | orderBy:order">
     <fieldset>
     
       <!-- Form Name -->
@@ -125,8 +125,10 @@
       <div class="form-group">
         <label class="col-md-4 control-label" for="button1id">Speichern</label>
         <div class="col-md-8">
-          <button id="save" ng-click="ctrl.back()" name="button1id" class="btn btn-primary">Speichern</button>
+          <button id="save" ng-click="ctrl.save(question)" name="button1id" class="btn btn-primary">Speichern</button>
+          <button id="reset" ng-click="ctrl.reset(question)" name="Zurücksetzen" class="btn btn-default">Zurücksetzen</button>
           <button id="cancel" ng-click="ctrl.back()" name="Abbrechen" class="btn btn-warning">Abbrechen</button>
+          <span ng-bind="ctrl.status"></span>          
         </div>
       </div>
     

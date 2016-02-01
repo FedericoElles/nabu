@@ -24,12 +24,12 @@
       <tr>
         <td ng-bind="point.order"></td>
         <td ng-bind="point.id"></td>
-        <td><a class="btn btn-success" href="#/questions4point/{{point.point_id}}">Fragen ({{ctrl.countQuestions(point.point_id)}})</a></td>
+        <td><a class="btn btn-success" href="#/questions4point/{{point.id}}">Fragen ({{ctrl.countQuestions(point.id)}})</a></td>
         <td ng-bind="point.lat"></td>
         <td ng-bind="point.long"></td>
         <td ng-bind="point.way_description"></td>
         <td ng-bind="point.distance_min"></td>
-        <td><a class="btn btn-success" href="#/edit1point/{{point.point_id}}">Edit</a></td>
+        <td><a class="btn btn-success" href="#/edit1point/{{point.id}}">Edit</a></td>
         <td><button ng-click="ctrl.drop(point)"class="btn btn-warning" >X</button></td>                               
       </tr>
     </tbody>
