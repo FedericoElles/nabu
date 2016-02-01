@@ -31,5 +31,30 @@
       return count;
     }
 
+    vm.new = function(routeId){
+      var data = {
+        route_id: routeId,
+        way_description: 'Neuer Punkt'
+      };
+      nabuData.new('points', data, function(err, data){
+        if (err){
+          console.log('Error creating record: ', err);
+        } else {
+          console.log('New record created: ', data);
+        }
+      });
+    };
+    
+    vm.drop = function(rec){
+      nabuData.drop('points', rec, function(err, data){
+        if (err){
+          console.log('Error deleting record: ', err);
+        } else {
+          console.log('Record deleted: ', data);
+        }
+        
+      });
+    };
+
   }
 })();

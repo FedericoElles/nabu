@@ -18,20 +18,24 @@
       <th>Beschreibung</th>
       <th>Genauigkeit</th>
       <th>Editieren</th>      
+      <th></th>
     </thead>
     <tbody ng-repeat="(index, point) in ctrl.nabu.data.points | filter:ctrl.filterFunction | orderBy:order">
       <tr>
         <td ng-bind="point.order"></td>
-        <td ng-bind="point.point_id"></td>
+        <td ng-bind="point.id"></td>
         <td><a class="btn btn-success" href="#/questions4point/{{point.point_id}}">Fragen ({{ctrl.countQuestions(point.point_id)}})</a></td>
         <td ng-bind="point.lat"></td>
         <td ng-bind="point.long"></td>
         <td ng-bind="point.way_description"></td>
         <td ng-bind="point.distance_min"></td>
-        <td><a class="btn btn-success" href="#/edit1point/{{point.point_id}}">Edit</a></td>        
+        <td><a class="btn btn-success" href="#/edit1point/{{point.point_id}}">Edit</a></td>
+        <td><button ng-click="ctrl.drop(point)"class="btn btn-warning" >X</button></td>                               
       </tr>
     </tbody>
   </table>
+  <button ng-click="ctrl.new(ctrl.params.routeId)" class="btn btn-primary">Punkt  hinzufügen</button>
+  <hr>  
   <button id="cancel" ng-click="ctrl.back()" class="btn btn-default">Zurück</button>
   
 </div>
