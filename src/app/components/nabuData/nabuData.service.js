@@ -133,7 +133,77 @@
       }); 
     };
 
+    /**
+     * table
+     * data - _x attributes are stripped
+     * cb(err, data)
+     */
+    this.new = function(table, data, cb){     
+      var headers = getHeaders();
+      $http({
+        method: 'POST',
+        url: CONFIG.url + 'index.php/'+MAP[table],
+        headers: headers,
+        withCredentials: true,
+        data: data
+      }).then(function successCallback(response) {
+        console.log('CORS CREATED', response.data);
+        if (response.data.error){
+          console.log('CREATE FAILED', response.data.error);
+          cb(data);
+        } else {
+          refresh();
+          cb(undefined, data);
+        }
 
+        // this callback will be called asynchronously
+        // when the response is available
+      }, function errorCallback(response) {
+        console.log('CORS TEST ERROR', response);
+        cb(response);
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+      }); 
+    };
+    
+    
+    /**
+     * table
+     * data - _x attributes are stripped
+     * cb(err, data)
+     */
+    this.drop = function(table, data, cb){   
+      if (!confirm('Bitte bestätigen.')){
+        return false;
+      }
+        
+      var headers = getHeaders();
+      $http({
+        method: 'DELETE',
+        url: CONFIG.url + 'index.php/'+MAP[table]+'/'+PRIMARY[table]+'/'+data[PRIMARY[table]],
+        headers: headers,
+        withCredentials: true
+      }).then(function successCallback(response) {
+        console.log('CORS DELETED', response.data);
+        if (response.data.error){
+          console.log('DELETE FAILED', response.data.error);
+          cb(data);
+        } else {
+          refresh();
+          cb(undefined, data);
+        }
+
+        // this callback will be called asynchronously
+        // when the response is available
+      }, function errorCallback(response) {
+        console.log('CORS TEST ERROR', response);
+        cb(response);
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+      }); 
+    };
+    
+        
 
     /**
      * Compares two objects and returns diff

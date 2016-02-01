@@ -7,12 +7,13 @@
   <h1>Bilder für Route #{{ctrl.params.routeId}}</h1>
 
 
-
+  <button id="cancel" ng-click="ctrl.back()" class="btn btn-default">Zurück</button>
   <table class="table">
     <thead>
       <th>Link</th>
       <th>Preview</th>
-      <th>Editieren</th>      
+      <th>Editieren</th>
+      <th></th>      
     </thead>
     <tbody ng-repeat="(index, picture) in ctrl.nabu.data.preview_pictures | filter:{route_id:ctrl.params.routeId} | orderBy:order">
       <tr>
@@ -28,10 +29,13 @@
           <a ng-if="ctrl.editId!=picture.picture_id" ng-click="ctrl.edit(picture)" class="btn btn-success" >Edit</a>
           <a ng-if="ctrl.editId==picture.picture_id" ng-click="ctrl.save(picture)" class="btn btn-primary" >Speichern</a>
           <a ng-if="ctrl.editId==picture.picture_id" ng-click="ctrl.cancel(picture)" class="btn btn-default" >Abbrechen</a>
-        </td>        
+        </td> 
+        <td><button ng-click="ctrl.drop(picture)"class="btn btn-warning" >X</button></td>               
       </tr>
     </tbody>
   </table>
+  <button ng-click="ctrl.new(ctrl.params.routeId)" class="btn btn-primary">Bild  hinzufügen</button>
+  <hr>
   <button id="cancel" ng-click="ctrl.back()" class="btn btn-default">Zurück</button>
   
 </div>

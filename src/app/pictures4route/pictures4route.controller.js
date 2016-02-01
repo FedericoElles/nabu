@@ -51,5 +51,31 @@
       vm.editId = false;
     }         
 
+
+    vm.new = function(routeId){
+      var data = {
+        route_id: routeId,
+        link: 'http://lorempixel.com/400/200/nature/'
+      };
+      nabuData.new('preview_pictures', data, function(err, data){
+        if (err){
+          console.log('Error creating record: ', err);
+        } else {
+          console.log('New record created: ', data);
+        }
+      });
+    };
+    
+    vm.drop = function(rec){
+      nabuData.drop('preview_pictures', rec, function(err, data){
+        if (err){
+          console.log('Error deleting record: ', err);
+        } else {
+          console.log('Record deleted: ', data);
+        }
+        
+      });
+    };
+
   }
 })();
