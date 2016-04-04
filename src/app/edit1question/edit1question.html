@@ -14,6 +14,13 @@
       <!-- Form Name -->
       <legend>Editieren {{question.question_id}}</legend>
       
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="spielId">Spiel {{question.Spiel_ID}}</label>
+        <div class="col-md-4">
+          <select ng-model="question.Spiel_ID" ng-options="value.key as value.val for value in ctrl.nabu.lov.Spiel_ID" class="form-control" ></select>
+        </div>
+      </div>
+      
      
       <!-- Textarea -->
       <div class="form-group">
@@ -24,7 +31,7 @@
       </div>
       
       <!-- Textarea -->
-      <div class="form-group">
+      <div ng-if="ctrl.nabu.spiele[question.Spiel_ID].question_text" class="form-group">
         <label class="col-md-4 control-label" for="question_text">Fragentext</label>
         <div class="col-md-4">                     
           <textarea ng-model="question.question_text" rows="4" class="form-control" name="question_text"></textarea>
@@ -41,85 +48,272 @@
         </div>
       </div>    
 
-      <!-- Text input-->
-      <div class="form-group">
-        <label class="col-md-4 control-label" ng-class="{'text-success':(1===question.correct_answer)}" for="a1">Antwort A</label>  
-        <div class="col-md-4">
-        <input ng-model="question.a1"  name="a1" type="text" placeholder="Text" class="form-control input-md">
+      <div  ng-if="ctrl.nabu.spiele[question.Spiel_ID].answers">
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" ng-class="{'text-success':(1===question.correct_answer)}" for="a1">Antwort A</label>  
+          <div class="col-md-4">
+          <input ng-model="question.a1"  name="a1" type="text" placeholder="Text" class="form-control input-md">
+          </div>
         </div>
+        
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" ng-class="{'text-success':(2===question.correct_answer)}" for="a2">Antwort B</label>  
+          <div class="col-md-4">
+          <input ng-model="question.a2"  name="a2" type="text" placeholder="Text" class="form-control input-md">
+          </div>
+        </div>
+        
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" ng-class="{'text-success':(3===question.correct_answer)}" for="a3">Antwort C</label>  
+          <div class="col-md-4">
+          <input ng-model="question.a3"  name="a1" type="text" placeholder="Text" class="form-control input-md">
+          </div>
+        </div>
+        
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" ng-class="{'text-success':(4===question.correct_answer)}" for="a4">Antwort D</label>  
+          <div class="col-md-4">
+          <input ng-model="question.a4"  name="a4" type="text" placeholder="Text" class="form-control input-md">
+          </div>
+        </div>
+  
+                          
+        <!-- Multiple Radios (inline) -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="radios">Korrekte Antwort</label>
+          <div class="col-md-4"> 
+            <label class="radio-inline" for="radios-0">
+              <input ng-model="question.correct_answer" type="radio" name="radios" id="radios-0" ng-value="1" checked="checked">
+              A
+            </label> 
+            <label class="radio-inline" for="radios-1">
+              <input ng-model="question.correct_answer" type="radio" name="radios" id="radios-1" ng-value="2">
+              B
+            </label> 
+            <label class="radio-inline" for="radios-2">
+              <input ng-model="question.correct_answer" type="radio" name="radios" id="radios-2" ng-value="3">
+              C
+            </label> 
+            <label class="radio-inline" for="radios-3">
+              <input ng-model="question.correct_answer" type="radio" name="radios" id="radios-3" ng-value="4">
+              D
+            </label>
+          </div>
+        </div>   
+
+        <!-- Textarea -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="answer_text">Antworttext</label>
+          <div class="col-md-4">                     
+            <textarea ng-model="question.answer_text" rows="4" class="form-control" name="answer_text"></textarea>
+          </div>
+        </div>   
+
       </div>
-      
-      <!-- Text input-->
-      <div class="form-group">
-        <label class="col-md-4 control-label" ng-class="{'text-success':(2===question.correct_answer)}" for="a2">Antwort B</label>  
-        <div class="col-md-4">
-        <input ng-model="question.a2"  name="a2" type="text" placeholder="Text" class="form-control input-md">
-        </div>
-      </div>
-      
-      <!-- Text input-->
-      <div class="form-group">
-        <label class="col-md-4 control-label" ng-class="{'text-success':(3===question.correct_answer)}" for="a3">Antwort C</label>  
-        <div class="col-md-4">
-        <input ng-model="question.a3"  name="a1" type="text" placeholder="Text" class="form-control input-md">
-        </div>
-      </div>
-      
-      <!-- Text input-->
-      <div class="form-group">
-        <label class="col-md-4 control-label" ng-class="{'text-success':(4===question.correct_answer)}" for="a4">Antwort D</label>  
-        <div class="col-md-4">
-        <input ng-model="question.a4"  name="a4" type="text" placeholder="Text" class="form-control input-md">
-        </div>
-      </div>
-                        
-      <!-- Multiple Radios (inline) -->
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="radios">Korrekte Antwort</label>
-        <div class="col-md-4"> 
-          <label class="radio-inline" for="radios-0">
-            <input ng-model="question.correct_answer" type="radio" name="radios" id="radios-0" ng-value="1" checked="checked">
-            A
-          </label> 
-          <label class="radio-inline" for="radios-1">
-            <input ng-model="question.correct_answer" type="radio" name="radios" id="radios-1" ng-value="2">
-            B
-          </label> 
-          <label class="radio-inline" for="radios-2">
-            <input ng-model="question.correct_answer" type="radio" name="radios" id="radios-2" ng-value="3">
-            C
-          </label> 
-          <label class="radio-inline" for="radios-3">
-            <input ng-model="question.correct_answer" type="radio" name="radios" id="radios-3" ng-value="4">
-            D
-          </label>
-        </div>
-      </div>   
-     
     
-       <!-- Textarea -->
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="answer_text">Antworttext</label>
-        <div class="col-md-4">                     
-          <textarea ng-model="question.answer_text" rows="4" class="form-control" name="answer_text"></textarea>
+   
+      
+      
+      <div  ng-if="ctrl.nabu.spiele[question.Spiel_ID].hints">      
+        <!-- Textarea -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="hint1">Hinweis 1</label>
+          <div class="col-md-4">                     
+            <textarea ng-model="question.hint1" rows="2" class="form-control" name="hint1"></textarea>
+          </div>
+        </div>      
+        
+        <!-- Textarea -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="hint2">Hinweis 2</label>
+          <div class="col-md-4">                     
+            <textarea ng-model="question.hint2" rows="2" class="form-control" name="hint2"></textarea>
+          </div>
         </div>
       </div>      
       
-       <!-- Textarea -->
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="hint1">Hinweis 1</label>
-        <div class="col-md-4">                     
-          <textarea ng-model="question.hint1" rows="2" class="form-control" name="hint1"></textarea>
+      <!-- New Fields -->     
+      <div ng-if="ctrl.nabu.spiele[question.Spiel_ID].searched_word" class="form-group">
+        <label class="col-md-4 control-label"  for="searched_word">Gesuchtes Wort</label>  
+        <div class="col-md-4">
+           <input ng-model="question.searched_word"  name="searched_word" type="text" placeholder="Text" class="form-control input-md">
         </div>
-      </div>      
+      </div>
       
-       <!-- Textarea -->
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="hint2">Hinweis 2</label>
-        <div class="col-md-4">                     
-          <textarea ng-model="question.hint2" rows="2" class="form-control" name="hint2"></textarea>
+      <div ng-if="ctrl.nabu.spiele[question.Spiel_ID].picture_1" class="form-group">
+        <label class="col-md-4 control-label"  for="picture_1">Bild 1</label>  
+        <div class="col-md-4">
+           <input ng-model="question.picture_1"  name="picture_1" type="text" placeholder="URL" class="form-control input-md">
+        </div>
+      </div>
+      
+      <div ng-if="ctrl.nabu.spiele[question.Spiel_ID].picture_2" class="form-group">
+        <label class="col-md-4 control-label"  for="picture_2">Bild 2</label>  
+        <div class="col-md-4">
+           <input ng-model="question.picture_2"  name="picture_2" type="text" placeholder="URL" class="form-control input-md">
         </div>
       </div>            
+      
+      <!-- Koordinaten -->
+      
+      <div ng-if="ctrl.nabu.spiele[question.Spiel_ID].xy">
+        
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="xy1">Pixel Koordinaten 1</label>
+          <div class="col-md-4">
+            <div class="input-group">
+              <input ng-model="question.x1"  name="xy1" class="form-control" placeholder="0" type="number">
+              <span class="input-group-addon">x</span>            
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="input-group">
+              <input ng-model="question.y1"  name="xy2" class="form-control" placeholder="0" type="number">
+              <span class="input-group-addon">y</span>            
+            </div>
+          </div>
+        </div>  
+        
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="xy2">Pixel Koordinaten 2</label>
+          <div class="col-md-4">
+            <div class="input-group">
+              <input ng-model="question.x2"  name="xy2" class="form-control" placeholder="0" type="number">
+              <span class="input-group-addon">x</span>            
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="input-group">
+              <input ng-model="question.y2"  name="xy2" class="form-control" placeholder="0" type="number">
+              <span class="input-group-addon">y</span>            
+            </div>
+          </div>        
+        </div>
+        
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="xy3">Pixel Koordinaten 3</label>
+          <div class="col-md-4">
+            <div class="input-group">
+              <input ng-model="question.x3"  name="xy3" class="form-control" placeholder="0" type="number">
+              <span class="input-group-addon">x</span>            
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="input-group">
+              <input ng-model="question.y3"  name="xy3" class="form-control" placeholder="0" type="number">
+              <span class="input-group-addon">y</span>            
+            </div>
+          </div>        
+        </div>
+        
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="xy4">Pixel Koordinaten 4</label>
+          <div class="col-md-4">
+            <div class="input-group">
+              <input ng-model="question.x4"  name="xy4" class="form-control" placeholder="0" type="number">
+              <span class="input-group-addon">x</span>            
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="input-group">
+              <input ng-model="question.y4"  name="xy4" class="form-control" placeholder="0" type="number">
+              <span class="input-group-addon">y</span>            
+            </div>
+          </div>        
+        </div>
+        
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="xy5">Pixel Koordinaten 5</label>
+          <div class="col-md-4">
+            <div class="input-group">
+              <input ng-model="question.x5"  name="xy5" class="form-control" placeholder="0" type="number">
+              <span class="input-group-addon">x</span>            
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="input-group">
+              <input ng-model="question.y5"  name="xy5" class="form-control" placeholder="0" type="number">
+              <span class="input-group-addon">y</span>            
+            </div>
+          </div>        
+        </div>                                
+      </div>
+      
+      
+      <!-- Pairs -->
+           
+      <div ng-if="ctrl.nabu.spiele[question.Spiel_ID].p">
+      
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="p1">Paar 1</label>  
+          <div class="col-md-4">
+            <div class="input-group">
+              <input ng-model="question.p1a"  name="p1" type="text" placeholder="URL/Text" class="form-control input-md">
+              <span class="input-group-addon">A</span>
+            </div>             
+          </div>
+          <div class="col-md-4">
+            <div class="input-group">
+              <input ng-model="question.p1b"  name="p1" type="text" placeholder="URL/Text" class="form-control input-md">
+              <span class="input-group-addon">B</span>
+            </div>             
+          </div>          
+        </div>
+      
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="p2">Paar 2</label>  
+          <div class="col-md-4">
+            <div class="input-group">
+              <input ng-model="question.p2a"  name="p2" type="text" placeholder="URL/Text" class="form-control input-md">
+              <span class="input-group-addon">A</span>
+            </div>             
+          </div>
+          <div class="col-md-4">
+            <div class="input-group">
+              <input ng-model="question.p2b"  name="p2" type="text" placeholder="URL/Text" class="form-control input-md">
+              <span class="input-group-addon">B</span>
+            </div>             
+          </div>          
+        </div>
+        
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="p3">Paar 3</label>  
+          <div class="col-md-4">
+            <div class="input-group">
+              <input ng-model="question.p3a"  name="p3" type="text" placeholder="URL/Text" class="form-control input-md">
+              <span class="input-group-addon">A</span>
+            </div>             
+          </div>
+          <div class="col-md-4">
+            <div class="input-group">
+              <input ng-model="question.p3b"  name="p3" type="text" placeholder="URL/Text" class="form-control input-md">
+              <span class="input-group-addon">B</span>
+            </div>             
+          </div>          
+        </div>
+        
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="p4">Paar 4</label>  
+          <div class="col-md-4">
+            <div class="input-group">
+              <input ng-model="question.p4a"  name="p4" type="text" placeholder="URL/Text" class="form-control input-md">
+              <span class="input-group-addon">A</span>
+            </div>             
+          </div>
+          <div class="col-md-4">
+            <div class="input-group">
+              <input ng-model="question.p4b"  name="p4" type="text" placeholder="URL/Text" class="form-control input-md">
+              <span class="input-group-addon">B</span>
+            </div>             
+          </div>          
+        </div>
+                              
+      </div>
+      
       
       <!-- Button (Double) -->
       <div class="form-group">

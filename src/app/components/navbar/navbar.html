@@ -13,7 +13,9 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right acme-navbar-text">
-        <li>Application was created {{ vm.relativeDate }}.</li>
+        <li><a href="" ng-click="vm.save()">Speichern 
+          <span ng-if="vm.saveStatus" ng-bind="' ('+vm.saveStatus+')'"></span>
+        </a></li>
       </ul>
     </div>
   </div>

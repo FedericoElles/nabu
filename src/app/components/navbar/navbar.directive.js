@@ -21,9 +21,15 @@
     return directive;
 
     /** @ngInject */
-    function NavbarController($route, moment) {
+    function NavbarController($route, moment, nabuData) {
       var vm = this;
       vm.$route = $route;
+      vm.saveStatus = "";
+      vm.save = function(){
+        nabuData.deploy(function(status){
+          vm.saveStatus = status;
+        })
+      };
 
       // "vm.creation" is avaible by directive option "bindToController: true"
       vm.relativeDate = moment(vm.creationDate).fromNow();

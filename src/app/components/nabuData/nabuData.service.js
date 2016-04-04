@@ -12,7 +12,8 @@
     this.data; //stores data
     this.dataBackup; //stores backup of data         
     var ctrl = {
-      isLoggedIn: false
+      isLoggedIn: false,
+      deployStatus : 'Nicht gespeichert.'
     };    
     
     var CONFIG = {
@@ -28,6 +29,31 @@
     };
     
     
+    this.lov = {
+      Spiel_ID: [
+        {key: 0, val: 'Multiple Choice'},
+        {key: 1, val: 'Multiple Choice'},
+        {key: 2, val: 'Einer ist falsch'},
+        {key: 3, val:  'Buchstabensalat'},
+        {key: 4, val: 'Galgenmännchen'},
+        {key: 5, val: 'Motiv raten'},
+        {key: 6, val: 'Finde den Fehler'},
+        {key: 7, val: 'Paare bilden'}
+      ]
+    };
+    
+    
+    this.spiele = 
+    [
+      {key: 0, question_text: true,  answers:	true,  hints: true,  hint2: true , searched_word: false,	picture_1: false,	picture_2: false,	xy: false,	p: false},      
+      {key: 1, question_text: true,  answers:	true,  hints: true,  hint2: true , searched_word: false,	picture_1: false,	picture_2: false,	xy: false,	p: false},
+      {key: 2, question_text:	true,  answers: true,  hints: true,  hint2: true , searched_word: false,	picture_1: false,	picture_2: false,	xy: false,	p: false},
+      {key: 3, question_text: false, answers: false, hints: false, hint2: false, searched_word: true ,	picture_1: false,	picture_2: false,	xy: false,	p: false},
+      {key: 4, question_text: false, answers: false, hints: false, hint2: false, searched_word: true ,	picture_1: false,	picture_2: false,	xy: false,	p: false}, 
+      {key: 5, question_text: false, answers: true , hints: false, hint2: false, searched_word: false,	picture_1: true ,	picture_2: false,	xy: false,	p: false},
+      {key: 6, question_text: false, answers: false, hints: false, hint2: false, searched_word: false,	picture_1: true ,	picture_2:  true,	xy: true,	  p: false},
+      {key: 7, question_text: false, answers: false, hints: false, hint2: false, searched_word: false,	picture_1: false,	picture_2: false,	xy: false,	p: true}
+    ];   
     //fetched stored password
     var storedAuth = localStorage.getItem('nabu-auth');
     if (typeof storedAuth === 'string'){
@@ -303,6 +329,25 @@
       }); 
     };
     
+    this.deployStatus = function(){
+      return ctrl.deployStatus;
+    }
+    
+    this.deploy = function(cb){
+      
+      $http.get('http://app.nabu-station-l-k.de/backend/deploy.php').then(function successCallback(response) {
+        ctrl.deployStatus = response;
+        cb(ctrl.deployStatus);
+
+        // this callback will be called asynchronously
+        // when the response is available
+      }, function errorCallback(response) {
+        ctrl.deployStatus = "Fehler"; 
+        cb(ctrl.deployStatus);
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+      });
+    };
    
   }
 

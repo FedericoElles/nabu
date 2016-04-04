@@ -10,6 +10,7 @@
 
   <table class="table">
     <thead>
+      <th>Spiel</th>
       <th>Schwierigkeit</th>
       <th>#</th>
       <th>Frage</th>
@@ -22,6 +23,7 @@
     </thead>
     <tbody ng-repeat="(index, question) in ctrl.nabu.data.multiple_choice | filter:ctrl.filterFunction | orderBy:difficulty">
       <tr>
+        <td ng-bind="ctrl.nabu.lov.Spiel_ID[question.Spiel_ID].val"></td>
         <td ng-bind="question.difficulty"></td>
         <td ng-bind="question.id"></td>
         <td ng-bind="question.question_text"></td>
