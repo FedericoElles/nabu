@@ -336,7 +336,8 @@
     this.deploy = function(cb){
       
       $http.get('http://app.nabu-station-l-k.de/backend/deploy.php').then(function successCallback(response) {
-        ctrl.deployStatus = response;
+        ctrl.deployStatus = response.data;
+        console.log('Saved', response);
         cb(ctrl.deployStatus);
 
         // this callback will be called asynchronously
