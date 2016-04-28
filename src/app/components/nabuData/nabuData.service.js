@@ -31,7 +31,7 @@
     
     this.lov = {
       Spiel_ID: [
-        {key: 0, val: 'Multiple Choice'},
+        {key: 0, val: ''},
         {key: 1, val: 'Multiple Choice'},
         {key: 2, val: 'Einer ist falsch'},
         {key: 3, val:  'Buchstabensalat'},

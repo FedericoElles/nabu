@@ -105,18 +105,16 @@
           </div>
         </div>   
 
-        <!-- Textarea -->
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="answer_text">Antworttext</label>
-          <div class="col-md-4">                     
-            <textarea ng-model="question.answer_text" rows="4" class="form-control" name="answer_text"></textarea>
-          </div>
-        </div>   
-
       </div>
     
-   
-      
+      <!-- Textarea -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="answer_text">Antworttext</label>
+        <div class="col-md-4">                     
+          <textarea ng-model="question.answer_text" rows="4" class="form-control" name="answer_text"></textarea>
+        </div>
+      </div>   
+    
       
       <div  ng-if="ctrl.nabu.spiele[question.Spiel_ID].hints">      
         <!-- Textarea -->
@@ -328,6 +326,12 @@
     
     </fieldset>
   </form>
-
+  
+  <hr>
+  <button id="cancel" ng-click="ctrl.back()" class="btn btn-default">Zurück</button>
+  <br>
+  <br>
+  <br>
+  <br>
   
 </div>
